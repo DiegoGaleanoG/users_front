@@ -1,0 +1,55 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+    <h1>
+      FORMULARIO USUARIOS
+    </h1>
+  </a>
+</nav>
+<form [formGroup]="reactiveForm" class="container">
+  <div class="row">
+    <div class="col-md-8 mt-4">
+      <ul class="list-group">
+        <li *ngFor="let user of userArray" class="list-group-item list-group-item-action " (click)="openForEdit(user)"
+          [class.active]="user == selectedUser">
+          <span class="badge badge-primary">{{user.id}}</span>
+          {{user.nombre}} - {{user.apellido}}
+        </li>
+      </ul>
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="card-title">
+            crear un usuario
+          </div>
+          <div class="form-group m-2">
+            <input class="form-control form-control-lg" id="name" formControlName="name" type="text"
+              placeholder="nombre">
+          </div>
+          <div class="form-group m-2">
+            <input class="form-control form-control-lg" id="surname" formControlName="surname" type="text"
+              placeholder="apellido">
+          </div>
+          <div class="form-group m-2">
+            <input id="phone" formControlName="phone" type="text" placeholder="telefono"
+              class="form-control form-control-lg">
+          </div>
+          <div class="form-group m-2">
+            <select class="form-select" id="codecomuna" bindLabel="Seleccione una opción" formControlName="codecomuna"
+              name="codecomuna">
+              <option *ngFor="let comuna of comunas" [value]="comuna.code">
+                {{ comuna.name }}
+              </option>
+            </select>
+          </div>
+          <button (click)="addOrEdit()" class="m-4 btn btn-primary">
+            guardar
+          </button>
+          <button *ngIf="selectedUser.id !== 0" class="btn btn-danger" (click)="delete()">
+            eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+</form>
